@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        "use strict";
+
+        class Rabochiy {
+            result(arg_1, arg_2) {
+
+                // Object.defineProperty(
+                //     this,
+                //     "result", {
+                //         configurable: false,
+                //         writable: false,
+                //         enumerable: false,
+                //         // set: function () {
+                //         //     console.log("=-)");
+                //         //     return "Низя";
+                //         // }
+                //     }
+                // );
+
+                const a = parseInt(arg_1);
+                const b = parseInt(arg_2);
+                let sum = 0;
+
+                if ((typeof a != "number" && typeof b != "number") ||
+                    (typeof arg_1 == "undefined" || typeof arg_2 == "undefined") ||
+                    (isNaN(a) || isNaN(b))) {
+                    return "=-(";
+                }
+
+                for (let i = 1; i <= a; i++) {
+                    for (let j = 1; j <= b; j++) {
+                        sum += (i / j) / (i + 0);
+                    }
+                }
+
+                return sum;
+            }
+        }
+
+
+        let obj = new Rabochiy;
+        console.log(obj);
+        console.log(obj.result("***13**37", "22_8"));
+    </script>
+
+    <!-- <script src=""></script> -->
+</body>
+
+</html>

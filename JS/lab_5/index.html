@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        "use strict";
+        let text =
+            `         Lorem Ipsum - это текст-"рыба", часто используемый в печати и вэб-дизайне.  Lorem Ipsum является стандартной "рыбой" для текстов на латинице с начала XVI века!!! В то время некий безымянный печатник создал большую коллекцию размеров и форм шрифтов, используя Lorem Ipsum для распечатки образцов... Lorem Ipsum не только успешно пережил без заметных т.д. изменений пять веков, но и перешагнул в электронный дизайн. Его популяризации в новое время послужили публикация листов Letraset с образцами Lorem Ipsum в 60-х годах и, в более недавнее время, программы электронной вёрстки типа Aldus PageMaker, в шаблонах которых используется Lorem Ipsum. `;
+        console.log(text);
+
+        class Sentence {
+            split_senc(text) {
+                let re = /[^(т\.д\.)|(т\.п\.)][.;!?]!*\.*/;
+                let sentence = text.split(re);
+                return sentence;
+            }
+            sent_value(value) {
+                this.sencent = value;
+                return this;
+            }
+        }
+        class Word {
+            word_value(value) {
+                this.word = value;
+                return this;
+            }
+
+            split_word(sencent) {
+                let word = sencent.map((a) => {
+                    a = a.replace(/ \s*/, "");
+                    // console.log(a.split(" ")); 
+                    return a.split(" ");
+                });
+                return word;
+            }
+
+            task(word) {
+                word.map((a) => {
+                    let test = a[0];
+                    a[0] = a[a.length - 1];
+                    a[a.length - 1] = test;
+                });
+                return word;
+            }
+        }
+        class Letter {
+            letter_value(value) {
+                this.letter = value;
+                // console.log(this, this.letter);
+                return this;
+            }
+            split_letter(word) {
+                let letter = word.map((s) => s.map(w => w.split("")));
+                return letter;
+            }
+        }
+
+        let sentence = new Sentence();
+        let word = new Word();
+        let letter = new Letter();
+
+        let text_sentence = sentence.split_senc(text);
+        let text_word = word.split_word(text_sentence);
+        let text_letter = letter.split_letter(text_word);
+
+        let task_word = word.task(text_letter);
+
+        // console.log(sentence, text_sentence);
+        // console.log(text_word, task_word);
+        // console.log(text_letter);
+
+
+        for (let sent in text_sentence) {
+            sent = sentence.sent_value(text_sentence[sent]);
+            // console.log(sent);
+        }
+        
+        // text_sentence.forEach(sent => {
+        // });
+        text_word.forEach(w => {
+            for (let t = 0; t < w.length; t++) {
+                text_word[w[t]] = word.word_value(w[t]);
+                // console.log(text_word[w[t]]);
+            }
+        });
+
+        for (let le = 0; le < text_letter.length; le++) {
+            for (let l = 0; l < text_letter[le].length; l++) {
+                for (let z = 0; z < text_letter[le][l].length; z++) {
+                    text_letter[le][l][z] = letter.letter_value(`${text_letter[le][l][z]}`);
+                    // console.log(text_letter[le][l][z]);
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

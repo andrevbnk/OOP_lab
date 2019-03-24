@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <script>
+        "use strict";
+
+        class Spat_xochy {
+            constructor(text) {
+                console.log(text);
+                this.sentence = text.split('.');
+                this.words = this.sentence.map((n) => n.split(" ")); 
+            }
+
+            words_exchange() {
+
+                this.words.map((n) => {
+                    return [n[1], n[n.length - 1]] = [n[n.length - 1], n[1]];
+                });
+                return this.words;
+            }
+        }
+
+        let lorem =
+            " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vitae laoreet est. Nullam molestie lorem et congue vehicula. Nam malesuada lorem orci, in convallis nisl molestie a. Vestibulum efficitur mollis tortor, vel semper lacus egestas eu. Pellentesque elit velit, suscipit sit amet nisi ac, volutpat rutrum nisi. Nunc pretium faucibus mauris, nec ultricies tellus varius eget. Maecenas fermentum tellus nec mi tempor, facilisis tincidunt elit aliquam. Sed ante metus, ultricies non justo vel, egestas bibendum risus. Vestibulum dignissim velit tortor, nec auctor odio finibus a. Duis placerat sagittis est in fringilla. Ut in est et elit elementum sollicitudin. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas at sagittis sem.";
+        let test = new Spat_xochy(lorem);
+        console.log(test.words_exchange());
+    </script>
+</body>
+
+</html>

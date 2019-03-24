@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        "use strict";
+
+
+        let B = [
+            [1, 2, 3],
+            [5, 6, 7],
+            [8, 9, 10],
+        ];
+
+        class Main {
+            transp(matrix) {
+                return matrix.map((col, i) => matrix.map(row => {
+                    console.log(i, row, row[i]);
+                    return row[i];
+                }));
+
+                // function lox(matrix) {
+                //     let finish = [];
+                //     for (let key in matrix) {
+                //         finish.push((function (a) {
+                //             let q = [];
+                //             for (let index in a) {
+                //                 (function(z){
+                //                     return q.push(matrix[index][key]);
+                //                 }(index));
+                //             }
+                //             return q;
+                //         }(matrix[+key])));
+                //     }
+                //     return finish;
+                // }
+
+                // return lox(B);
+
+            }
+
+            sred(matrix) {
+                let sum = 0;
+
+                matrix.map((n) => {
+                    n.map((m) => {
+                        sum = sum + m;
+                    })
+                });
+
+                return sum / (matrix.length * matrix.length);
+            }
+        }
+
+        let Sloshno_nazvati_peremennie = new Main;
+
+        let C = Sloshno_nazvati_peremennie.transp(B);
+        console.log(C);
+
+        let sred_c = Sloshno_nazvati_peremennie.sred(C);
+        console.log(sred_c);
+    </script>
+
+</body>
+
+</html>
