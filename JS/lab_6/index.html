@@ -15,62 +15,53 @@
 
     <script>
         'use strict';
+        
+        class Company_aircraft{
+            sorted(all) {
+                return all.sort((a, b) => a.range - b.range);
+            };
+            filters(all, a, b) {
+                return all.filter((z) => {
+                    // console.log(z.fuel, a, b, z.fuel >= a && z.fuel <= b);
+                    return z.fuel >= a && z.fuel <= b;
+                });
+            }
+        }
+        Company_aircraft.prototype.all_air_craft = [];
 
-        class Src {
-            constructor() {
-                this.age = 15;
-                this.location = 'Kiev';
-                this.military = function (type) {
-                    this.type = type;
-                    this.weapon = true;
-                    return this;
-                };
-                this.passenger = function (type) {
-                    this.type = type;
-                    this.facilities = true;
-                    return this;
-                };
-                this.sorted = function (all) {
-                    return all.sort((a, b) => a.range - b.range);
-                };
-                this.filters = function (all, a, b) {
-                    return all.filter((z) => {
-                        // console.log(z.fuel, a, b, z.fuel >= a && z.fuel <= b);
-                        return z.fuel >= a && z.fuel <= b;
-                    });
-
-                }
-                console.log(this);
+        class Aircraft_military extends Company_aircraft {
+            constructor(fuel, capacity, range, load_capacity_bullets) {
+                super();
+                this.fuel = fuel;
+                this.type = "military";  
+                this.capacity = capacity;
+                this.range = range;
+                this.load_capacity_bullets = load_capacity_bullets + " кг. пуль";
                 this.all_air_craft.push(this);
             }
         }
 
-        Src.prototype.all_air_craft = [];
-
-        class Company_aircraft extends Src {
-            constructor(type, fuel, capacity, range) {
+        class Aircraft_passenger extends Company_aircraft {
+            constructor(fuel, capacity, range, load_capacity) {
                 super();
-                console.log(this.all_air_craft);
                 this.fuel = fuel;
+                this.type = "passenger";
                 this.capacity = capacity;
                 this.range = range;
-                type == "military" ? this.military(type) : type == "passenger" ?
-                    this.passenger(type) : console.log("=-(");
+                this.load_capacity = load_capacity + " посадочных мест";
+                this.facilities = true;
+                this.all_air_craft.push(this);
+            
             }
         }
+        let company = new Company_aircraft();
+        let combat_aircraft = new Aircraft_military(50, 15, 150, 300);
+        let passenger_aircraft = new Aircraft_passenger(65, 65, 80,50);
+        let Zero = new Aircraft_military(40, 5, 120, 150);
+        let IK_40 = new Aircraft_passenger(85, 30, 175, 60);
 
-
-        Company_aircraft.prototype.age = 10;
-
-        let combat_aircraft = new Company_aircraft("military", 50, 15, 150);
-        let passenger_aircraft = new Company_aircraft("passenger", 65, 65, 250);
-        let Zero = new Company_aircraft("military", 40, 5, 120);
-        let IK_40 = new Company_aircraft("passenger", 85, 30, 175);
-
-        let all_air_craft = combat_aircraft.__proto__.all_air_craft;
-
-        console.log(JSON.parse(JSON.stringify(all_air_craft)), combat_aircraft.sorted(all_air_craft));
-        console.log(JSON.parse(JSON.stringify(all_air_craft)), combat_aircraft.filters(all_air_craft, 40, 70));
+        console.log(JSON.parse(JSON.stringify(company.all_air_craft)), company.sorted(company.all_air_craft));
+        console.log(JSON.parse(JSON.stringify(company.all_air_craft)), company.filters(company.all_air_craft, 40, 70));
     </script>
 </body>
 

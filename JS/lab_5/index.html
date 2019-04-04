@@ -20,6 +20,45 @@
         console.log(text);
 
         class Sentence {
+            constructor() {
+                this.Words = class Word {
+                    constructor() {
+                        this.Letter = class Letter {
+                            letter_value(value) {
+                                this.letter = value;
+                                return this;
+                            }
+                            split_letter(word) {
+                                let letter = word.map((s) => s.map(w => w.split("")));
+                                return letter;
+                            }
+                        }
+                    }
+                    word_value(value) {
+                        this.word = value;
+                        return this;
+                    }
+
+                    split_word(sencent) {
+                        let word = sencent.map((a) => {
+                            a = a.replace(/ \s*/, "");
+                            // console.log(a.split(" ")); 
+                            return a.split(" ");
+                        });
+                        return word;
+                    }
+
+                    task(word) {
+                        word.map((a) => {
+                            let test = a[0];
+                            a[0] = a[a.length - 1];
+                            a[a.length - 1] = test;
+                        });
+                        return word;
+                    }
+                }
+            }
+
             split_senc(text) {
                 let re = /[^(т\.д\.)|(т\.п\.)][.;!?]!*\.*/;
                 let sentence = text.split(re);
@@ -30,45 +69,11 @@
                 return this;
             }
         }
-        class Word {
-            word_value(value) {
-                this.word = value;
-                return this;
-            }
-
-            split_word(sencent) {
-                let word = sencent.map((a) => {
-                    a = a.replace(/ \s*/, "");
-                    // console.log(a.split(" ")); 
-                    return a.split(" ");
-                });
-                return word;
-            }
-
-            task(word) {
-                word.map((a) => {
-                    let test = a[0];
-                    a[0] = a[a.length - 1];
-                    a[a.length - 1] = test;
-                });
-                return word;
-            }
-        }
-        class Letter {
-            letter_value(value) {
-                this.letter = value;
-                // console.log(this, this.letter);
-                return this;
-            }
-            split_letter(word) {
-                let letter = word.map((s) => s.map(w => w.split("")));
-                return letter;
-            }
-        }
 
         let sentence = new Sentence();
-        let word = new Word();
-        let letter = new Letter();
+        let word = new sentence.Words();
+        let letter = new word.Letter();
+        // console.log(sentence, word, letter);
 
         let text_sentence = sentence.split_senc(text);
         let text_word = word.split_word(text_sentence);
@@ -76,18 +81,17 @@
 
         let task_word = word.task(text_letter);
 
-        // console.log(sentence, text_sentence);
-        // console.log(text_word, task_word);
-        // console.log(text_letter);
+        console.log(sentence, text_sentence);
+        console.log(text_word, task_word);
+        console.log(text_letter);
 
 
         for (let sent in text_sentence) {
             sent = sentence.sent_value(text_sentence[sent]);
             // console.log(sent);
         }
-        
-        // text_sentence.forEach(sent => {
-        // });
+
+
         text_word.forEach(w => {
             for (let t = 0; t < w.length; t++) {
                 text_word[w[t]] = word.word_value(w[t]);
